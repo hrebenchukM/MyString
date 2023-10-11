@@ -3,18 +3,20 @@
 #include<iostream>
 using namespace std;
 
-
+static int objectCount;
 MyString::MyString()
 {
 	str = new char[80];
 	size = 0;
+	objectCount++;
 }
 
 MyString::MyString(int size)
 {
-
+	this->size = 0;
 	str = new char[size];
-	size = 0;
+	objectCount++;
+	
 
 }
 
@@ -30,6 +32,7 @@ MyString::MyString(const char* s)
 	size = strlen(s);//Чтоб не писать постоянно и не считать постоянно количество символов
 	str = new char[size + 1];
 	strcpy_s(str, size + 1, s);
+	objectCount++;
 }
 
 MyString::~MyString()
@@ -64,9 +67,26 @@ void MyString::MyStrcpy(MyString& obj)
 	size = obj.size;
 }
 
-bool MyString::MyStrStr(const char* s)
+bool MyString::MyStrStr(const char* sub)
 {
-	return strstr(str,s) !=nullptr;
+	int substrSize=0;
+	for (substrSize; sub[substrSize] != '\0';) {
+		substrSize++;
+	}
+
+	for (int i = 0; i <= size - substrSize; ++i) {
+		bool founded = true;
+		for (int j = 0; j < substrSize; ++j) {
+			if (str[i + j] != sub[j]) {
+				founded = false;
+				break;
+			}
+		}
+		if (founded) {
+			return true;
+		}
+	}
+	return false;
 }
 
 int MyString::MyChr(char c)
@@ -99,14 +119,52 @@ void MyString::MyStrCat(MyString& b)
 	delete[] str;
 	str = newstr;
 	size = size + b.size;
-
-//	strcat_s(str, size, b.str);
 }
 
-MyString MyString::operator+(MyString& b) {
-	MyString newstr(*this);
-	newstr.MyStrCat(b);
-	return newstr;
+
+void MyString::MyDelChr(char c) {
+	int newSize = 0;
+	for (int i = 0; i < size; ++i) {
+		if (str[i] != c) {
+			++newSize;
+		}
+	}
+
+	char* newStr = new char[newSize + 1];
+	int newIndex = 0;
+	for (int i = 0; i < size; ++i) {
+		if (str[i] != c) {
+			newStr[newIndex++] = str[i];
+		}
+	}
+	newStr[newSize] = '\0';
+
+	delete[] str;
+	str = newStr;
+	size = newSize;//Like (size -count of c)
+}
+
+	
+	
+
+
+
+int MyString::MyStrCmp(MyString& b)
+{
+		int i = 0;
+		while (str[i] == b.str[i] && str[i] != '\0' && b.str[i] != '\0') {//сравнивает символы в строках до тех пор, пока они совпадают и не достигнут конца одной из строк. 
+			i++;
+		}
+
+		if (str[i] < b.str[i]) {
+			return -1;
+		}
+		else if (str[i] > b.str[i]) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 }
 
 char* MyString::GetStr()
@@ -117,6 +175,47 @@ char* MyString::GetStr()
 int MyString::GetSize()
 {
 	return size;
+}
+
+int MyString::GetTotalObjects()
+{
+		return objectCount;
+}
+
+
+
+
+MyString MyString::operator+(MyString& b)
+{
+	MyString newstr(*this);
+	newstr.MyStrCat(b);
+	return newstr;
+}
+
+MyString& MyString::operator++()
+{
+		MyString temp("X");
+		MyStrCat(temp);
+		return *this;
+	
+}
+
+
+
+MyString& MyString::operator+=( MyString& b)
+{
+	MyStrCat(b); 
+	return *this;
+}
+
+bool MyString::operator==(const MyString& obj)  
+{
+	return MyStrStr(obj.str);
+}
+
+bool MyString::operator!=(const MyString& obj) 
+{
+	return !MyStrStr(obj.str);
 }
 
 
