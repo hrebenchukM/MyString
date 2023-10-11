@@ -5,6 +5,10 @@ using namespace std;
 
 int main()
 {
+	MyString s4 = MyString("Test");
+	MyString s5 = MyString("Test");
+	MyString s6= MyString("Test by Mary Hrebenchuk");
+
 	MyString s = MyString("This is test");
 	s.Print();
 	cout << endl;
@@ -38,34 +42,18 @@ int main()
 	assert(strcmp(result.GetStr(), "This is test.Very tasty...") == 0); // Проверяем, что строки объединены верно
 
 	// удаление символа 'e' из строки
-	s.MyDelChr('e');
-	assert(strcmp(s.GetStr(), "This is tst.Vry tasty...") == 0);// Проверяем, что символ 'e' удален верно
+	s.MyDelChr('i');
+	assert(strcmp(s.GetStr(), "Ths s test") == 0);// Проверяем, что символ 'e' удален верно
 
 	// сравнение строк
-	MyString s4 = MyString("This is test");
-	assert(s.MyStrCmp(s4) == 0); // Ожидается 0, так как строки равны
-	assert(s.MyStrCmp(s2) < 0); // Ожидается -1, так как первая строка меньше второй
-	assert(s2.MyStrCmp(s4) > 0); // Ожидается 1, так как первая строка больше второй
+	
+	assert(s5.MyStrCmp(s4) == 0); // Ожидается 0, так как строки равны
+	assert(s5.MyStrCmp(s6) < 0); // Ожидается -1, так как первая строка меньше второй
+	assert(s6.MyStrCmp(s4) > 0); // Ожидается 1, так как первая строка больше второй
 
 
 
-	if (s == s2) {
-		cout << "Strings ==." << endl;
-	}
-	else if (s != s2) {
-		cout << "Strings not ==." << endl;
-	}
-	if (s == s4) {
-		cout << "Strings ==." << endl;
-	}
-	else if (s != s4) {
-		cout << "Strings not ==." << endl;
-	}
-
-
-
-
-	cout << "All tests passed!" << endl;
+	cout << endl<<"All tests passed!" << endl;
 
 
 

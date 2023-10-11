@@ -50,7 +50,9 @@ public:
 
 	MyString operator+(MyString& b);// объединение строк перегрузка оператора +
 	MyString&  operator++();  //инкременты для увеличения длины строки
-	bool operator==(const MyString& obj);
-	bool operator!=(const MyString& obj);
+
+
+	/*bool operator==(const MyString& obj);
+	bool operator!=(const MyString& obj);*/
 };
 

@@ -120,8 +120,6 @@ void MyString::MyStrCat(MyString& b)
 	str = newstr;
 	size = size + b.size;
 }
-
-
 void MyString::MyDelChr(char c) {
 	int newSize = 0;
 	for (int i = 0; i < size; ++i) {
@@ -130,19 +128,21 @@ void MyString::MyDelChr(char c) {
 		}
 	}
 
-	char* newStr = new char[newSize + 1];
+	char* newStr = new char[newSize+1 ];
 	int newIndex = 0;
 	for (int i = 0; i < size; ++i) {
 		if (str[i] != c) {
 			newStr[newIndex++] = str[i];
 		}
 	}
-	newStr[newSize] = '\0';
+	newStr[newIndex] = '\0';
 
 	delete[] str;
 	str = newStr;
-	size = newSize;//Like (size -count of c)
+	size = newSize;//Like (size - count of c)
 }
+
+
 
 	
 	
@@ -207,16 +207,15 @@ MyString& MyString::operator+=( MyString& b)
 	MyStrCat(b); 
 	return *this;
 }
-
-bool MyString::operator==(const MyString& obj)  
-{
-	return MyStrStr(obj.str);
-}
-
-bool MyString::operator!=(const MyString& obj) 
-{
-	return !MyStrStr(obj.str);
-}
-
+//
+//bool MyString::operator==(const MyString& obj)  
+//{
+//	return MyStrStr(obj.str);
+//}
+//
+//bool MyString::operator!=(const MyString& obj) {
+//	return !MyStrStr(obj.str);
+//}
+//
 
 
