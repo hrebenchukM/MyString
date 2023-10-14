@@ -11,6 +11,7 @@ public:
 
 	MyString(); //конструктор по умолчанию, позволяющий создать строку длиной 80 символов;
 	MyString(int); //конструктор, позволяющий создавать строку произвольного размера;
+	MyString(char c);
 	MyString(const char*);//конструктор, который создаёт строку и инициализирует её строкой, полученной от пользователя. 
 	MyString(const MyString&);//Конструктор копирования
 	~MyString();//Деструктор 
@@ -42,17 +43,24 @@ public:
 
 
 
-	//ПЕРЕГРУЗКИ ОПЕРАТОРОВ
-
-	MyString operator+(const MyString& b); //сложение для конкатенации,
-
-	MyString& operator+=( MyString&b); //сложение для конкатенации,
-
+	//ПЕРЕГРУЗКИ ОПЕРАТОРОВ методом
+	// 
+	//MyString operator+(const MyString& b); //сложение для конкатенации,
+    MyString& operator+=( MyString&b); //сложение для конкатенации,
 	MyString operator+(MyString& b);// объединение строк перегрузка оператора +
-	MyString&  operator++();  //инкременты для увеличения длины строки
+	//MyString&  operator++();  //инкременты для увеличения длины строки
+	//  
+	//Перегрузка оператора индексирования 
+	char& operator[](const int index);
+	//Перегрузка оператора преобразования типа
+	//возвращает другой тип например matrix(1,2)=4.5// матрица возвращает дабл 
+	void operator() (); //Input
+	//MyString operator+(char c);
+	//MyString operator+(int b);
 
 
 	/*bool operator==(const MyString& obj);
 	bool operator!=(const MyString& obj);*/
+
 };
 

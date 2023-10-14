@@ -11,6 +11,17 @@ MyString::MyString()
 	objectCount++;
 }
 
+
+MyString::MyString(char c)
+{
+	size = 1;
+	str = new char[2];
+	str[0] = c;
+	str[1] = '\0';
+	objectCount++;
+}
+
+
 MyString::MyString(int size)
 {
 	this->size = 0;
@@ -120,6 +131,7 @@ void MyString::MyStrCat(MyString& b)
 	str = newstr;
 	size = size + b.size;
 }
+
 void MyString::MyDelChr(char c) {
 	int newSize = 0;
 	for (int i = 0; i < size; ++i) {
@@ -141,10 +153,6 @@ void MyString::MyDelChr(char c) {
 	str = newStr;
 	size = newSize;//Like (size - count of c)
 }
-
-
-
-	
 	
 
 
@@ -192,21 +200,76 @@ MyString MyString::operator+(MyString& b)
 	return newstr;
 }
 
-MyString& MyString::operator++()
-{
-		MyString temp("X");
-		MyStrCat(temp);
-		return *this;
-	
-}
-
-
-
+//MyString& MyString::operator++()
+//{
+//		MyString temp("X");
+//		MyStrCat(temp);
+//		return *this;
+//	
+//}
+//
+//
+//
 MyString& MyString::operator+=( MyString& b)
 {
 	MyStrCat(b); 
 	return *this;
 }
+
+
+
+
+char& MyString::operator[](const int index) {
+	if (index < 0)
+	{
+		return str[0];
+	}
+	else if (index >size)
+	{
+		return str[size - 1];
+	}
+	else
+	{
+		return str[index];
+	}
+
+}
+
+
+void MyString ::operator()() 
+{
+	Input();
+}
+//
+//MyString MyString::operator+(char c)
+//{
+//	MyString newstr(*this);
+//	MyString s2(c);
+//	newstr.MyStrCat(s2);
+//	return newstr;
+//}
+//
+//
+//MyString MyString::operator+(int b)
+//{
+//	int newSize = size + b;
+//	MyString rez(newSize+1);
+//
+//	for (int i = 0; i < size; i++)
+//	{
+//		rez.str[i] = str[i];
+//	}
+//
+//	for (int i = 0; i <b; i++)
+//	{
+//		rez.str[size + i] = '0';
+//
+//	}
+//	rez.str[newSize] = '\0';
+//	return rez;
+//}
+
+
 //
 //bool MyString::operator==(const MyString& obj)  
 //{
@@ -217,5 +280,3 @@ MyString& MyString::operator+=( MyString& b)
 //	return !MyStrStr(obj.str);
 //}
 //
-
-

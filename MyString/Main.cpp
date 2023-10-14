@@ -3,10 +3,98 @@
 #include <cassert> 
 using namespace std;
 
+
+
+
+MyString operator++(MyString& b,int useless)//a++
+{
+	MyString result(b);
+	MyString temp('X');
+	result.MyStrCat(temp);
+	return result;
+
+}
+
+
+
+
+MyString operator++(MyString& b)//++a
+{
+	MyString temp('X');
+	temp.MyStrCat(b);
+	return temp;
+}
+
+
+
+
+
+MyString operator+(MyString& str,int b)
+{
+	int size = str.GetSize();
+	int newSize = size + b;
+//	MyString rez(newSize + 1);
+
+
+	char* arr0 = new char[b + 1];
+	for (int i = 0; i < b; i++)
+	{
+		arr0[i] = '0';
+	}
+	arr0[b] = '\0';
+
+	MyString newstr(arr0);
+	MyString newstr2(str);
+	newstr2.MyStrCat(newstr);
+	return newstr2;
+}
+
+
+MyString operator+(int b,MyString& str )
+{
+	int size = str.GetSize();
+	int newSize = size + b;
+//	MyString rez(newSize + 1);
+
+
+	char *arr0= new char[b+1];
+	for (int i = 0; i < b; i++)
+	{
+		arr0[i] = '0';
+	}
+	arr0[b] = '\0';
+
+	MyString newstr(arr0);
+	newstr.MyStrCat(str);
+	return  newstr;
+
+
+}
+
+
+
+
+MyString operator+(MyString& b,char c)
+{
+	MyString newstr(b);
+	MyString s2(c);
+	newstr.MyStrCat(s2);
+	return newstr;
+}
+
+MyString operator+(char c, MyString& b)
+{
+	MyString s2(c);
+	s2.MyStrCat(b);
+	return s2;
+}
+
 int main()
 {
 	MyString s4 = MyString("Test");
 	MyString s5 = MyString("Test");
+	MyString s8 = MyString("Test=");
+
 	MyString s6= MyString("Test by Mary Hrebenchuk");
 
 	MyString s = MyString("This is test");
@@ -21,6 +109,7 @@ int main()
 	MyString s3;// = s;
 	s3.MyStrcpy(s);
 	s3.Print();
+	cout <<endl;
 
 	// поиск подстроки в строке
 	//Протестировать два случая одним запуском программы
@@ -52,6 +141,52 @@ int main()
 	assert(s6.MyStrCmp(s4) > 0); // Ожидается 1, так как первая строка больше второй
 
 
+	////Перегрузка оператора индексирования
+	assert('T' == s4[0]);
+	assert('e' == s4[1]);
+	assert('s' == s4[2]);
+	assert('t' == s4[3]);
+	assert('t' == s4[100]);
+
+
+	//Перегрузка оператора преобразования типа Input
+	/*MyString s10;
+	s10();
+	s10.Print();*/
+
+	MyString s11 = s4 + '!';
+	assert(strcmp(s11.GetStr(), "Test!") == 0);
+	//s11.Print();
+
+	MyString s12 = '!' + s4;
+//	s12.Print();
+	assert(strcmp(s12.GetStr(), "!Test") == 0);
+
+
+
+
+
+
+
+
+
+	MyString s13 = s4 + 10;
+	//s13.Print();
+	assert(strcmp(s13.GetStr(), "Test0000000000") == 0);
+
+	MyString s14 =  10 + s4;
+	//s14.Print();
+	assert(strcmp(s14.GetStr(), "0000000000Test") == 0);
+
+
+
+	MyString s15 = ++s4;
+	//s15.Print();
+	assert(strcmp(s15.GetStr(), "XTest") == 0);
+
+	MyString s16 = s8++;
+	//s16.Print();
+	assert(strcmp(s16.GetStr(), "Test=X") == 0);
 
 	cout << endl<<"All tests passed!" << endl;
 
