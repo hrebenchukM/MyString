@@ -1,5 +1,6 @@
 #include "MyString.h"
 #include<string.h>
+#include<string>
 #include<iostream>
 using namespace std;
 
@@ -35,6 +36,7 @@ MyString::MyString(const MyString& obj) {
 	str = new char[obj.size + 1];
 	strcpy_s(str, obj.size + 1, obj.str);
 	size = obj.size;
+	objectCount++;
 }
 
 
@@ -49,6 +51,7 @@ MyString::MyString(const char* s)
 MyString::~MyString()
 {
 	delete[]str;
+	objectCount--;
 }
 
 void MyString::Print()
@@ -231,9 +234,8 @@ MyString MyString::operator+(MyString& b)
 //		return *this;
 //	
 //}
-//
-//
-//
+
+
 MyString& MyString::operator+=( MyString& b)
 {
 	MyStrCat(b); 
@@ -280,7 +282,31 @@ MyString& MyString::operator=(const MyString& b)
 	return *this;//4
 }
 
+MyString::MyString(MyString&& b)
+{
+	str = b.str;
+	b.str = nullptr;
+	size = b.size;
+	b.size = 0;
+	cout << "Move constructor" << endl;
+	objectCount++;
+}
 
+MyString& MyString::operator=(MyString&& obj)
+{
+	if ( this == &obj)
+	{
+		return *this;
+		
+	}
+	delete[] str;
+	size = obj.size;
+	obj.size = 0;
+	str = obj.str;
+	obj.str = nullptr;
+
+	return *this;
+}
 //
 //MyString MyString::operator+(char c)
 //{

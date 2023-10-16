@@ -70,7 +70,9 @@ public:
 	bool operator!=(const MyString& obj);*/
 
 	MyString& operator=(const MyString& b);//Перегрузка оператора =
+
+	MyString(MyString&& b); // Конструктор переноса
+	MyString& operator=(MyString&& obj); //Перегрузка оператора присваивания с переносом.
 	
 
-};
 

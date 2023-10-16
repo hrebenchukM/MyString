@@ -219,9 +219,23 @@ int main()
 
 	MyString str1;
 	cout << "Enter a string: ";
-	cin >> str1; 
+	cin >> str1;
 	cout << "Your string: ";
 	cout << str1 << endl;
+
+
+
+	MyString str2("Step the best!");
+	MyString str3(move(str2));
+	cout << "str3: " << str3 << endl;
+
+
+	MyString str4("Step number one!");
+	MyString str5;
+	str5= move(str4);
+	cout << "str5: " << str5 << endl;
+
+
 
 	cout << endl << "All tests passed!" << endl;
 
