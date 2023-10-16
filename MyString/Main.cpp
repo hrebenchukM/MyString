@@ -5,6 +5,28 @@ using namespace std;
 
 
 
+istream& operator >>(istream& is, MyString& b)
+{
+
+
+	char* str = new char[100]; // максимальная длина вводимой строки 
+	is >> str;
+	b.SetStr(str);
+	b.SetSize(strlen(str));
+	delete[] str;
+	return is;
+
+
+}
+ostream& operator <<(ostream& os, MyString& b)
+{
+	os << b.GetStr() << endl;
+	os << b.GetSize() << endl;
+
+	return os;
+
+}
+
 
 MyString operator++(MyString& b,int useless)//a++
 {
@@ -188,10 +210,19 @@ int main()
 	//s16.Print();
 	assert(strcmp(s16.GetStr(), "Test=X") == 0);
 
-	cout << endl<<"All tests passed!" << endl;
+
+	s8 = s6;
+	assert(strcmp(s8.GetStr(), "Test by Mary Hrebenchuk") == 0);
 
 
+	
 
+	MyString str1;
+	cout << "Enter a string: ";
+	cin >> str1; 
+	cout << "Your string: ";
+	cout << str1 << endl;
 
+	cout << endl << "All tests passed!" << endl;
 
 }

@@ -114,7 +114,7 @@ int MyString::MyChr(char c)
 
 int MyString::MyStrLen()
 {
-	return size;
+	return size; 
 }
 
 void MyString::MyStrCat(MyString& b)
@@ -173,6 +173,30 @@ int MyString::MyStrCmp(MyString& b)
 		else {
 			return 0;
 		}
+}
+
+
+void MyString::SetSize(int n)
+{
+	if (n >= 0)
+	{
+		size = n;
+	}
+	else
+	{
+		size = 0;
+	}
+}
+void MyString::SetStr(const char* n)
+{
+	
+	if (str != nullptr)
+	{
+		delete[] str;
+	}
+	size = strlen(n);
+	str = new char[size + 1];
+	strcpy_s(str, size + 1, n);
 }
 
 char* MyString::GetStr()
@@ -240,6 +264,23 @@ void MyString ::operator()()
 {
 	Input();
 }
+
+
+MyString& MyString::operator=(const MyString& b)
+{
+	if (this != &b) // 1 a=a
+	{
+		delete[] str;// 2 a=b
+		size = b.size;
+		str = new char[size + 1]; //3
+
+		strcpy_s(str, size + 1, b.str);//3
+	}
+	
+	return *this;//4
+}
+
+
 //
 //MyString MyString::operator+(char c)
 //{

@@ -37,30 +37,40 @@ public:
 	int MyStrCmp(MyString& b); // сравнение строк(-1 – первая строка меньше чем вторая)(1 – первая больше чем вторая)(0 – строки равны!)
 
 
+	void SetStr(const char* n);
 	char* GetStr();
+
+	void SetSize(int n);
 	int GetSize();
 	static int GetTotalObjects();
 
 
 
 	//ПЕРЕГРУЗКИ ОПЕРАТОРОВ методом
-	// 
+	
 	//MyString operator+(const MyString& b); //сложение для конкатенации,
     MyString& operator+=( MyString&b); //сложение для конкатенации,
 	MyString operator+(MyString& b);// объединение строк перегрузка оператора +
 	//MyString&  operator++();  //инкременты для увеличения длины строки
-	//  
+
+
 	//Перегрузка оператора индексирования 
 	char& operator[](const int index);
-	//Перегрузка оператора преобразования типа
-	//возвращает другой тип например matrix(1,2)=4.5// матрица возвращает дабл 
-	void operator() (); //Input
+
+	
+	void operator() ();//Input.Перегрузка оператора преобразования типа.возвращает другой тип например matrix(1,2)=4.5(матрица возвращает дабл) 
+	
+
+
 	//MyString operator+(char c);
 	//MyString operator+(int b);
 
 
 	/*bool operator==(const MyString& obj);
 	bool operator!=(const MyString& obj);*/
+
+	MyString& operator=(const MyString& b);//Перегрузка оператора =
+	
 
 };
 
