@@ -48,11 +48,28 @@ MyString::MyString(const char* s)
 	objectCount++;
 }
 
+
+
 MyString::~MyString()
 {
 	delete[]str;
 	objectCount--;
 }
+
+
+MyString::MyString(initializer_list<char> param)
+{
+	size = param.size();
+	str = new char[size];
+	int i = 0;
+	for (auto pt = param.begin(); pt != param.end(); pt++)
+	{
+		str[i] = *pt;
+		i++;
+	}
+	str[size] = '\0';
+}
+
 
 void MyString::Print()
 {

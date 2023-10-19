@@ -234,7 +234,7 @@ int main()
 	MyString str5;
 	str5= move(str4);
 	cout << "str5: " << str5 << endl;
-
+	MyString str6{'H','E','L','L','O'};
 
 
 	cout << endl << "All tests passed!" << endl;
